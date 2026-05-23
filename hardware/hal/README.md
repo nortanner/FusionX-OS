@@ -22,3 +22,7 @@
 - Uses `system_profiler SPDisplaysDataType -json` on macOS.
 - Captures `_name`, `spdisplays_metal`, `spdisplays_vram_shared`, and IDs when present.
 - Adds labels: `integrated`, `apple-silicon`.
+
+## Capability Snapshot CLI
+- `cargo run --bin hal-capabilities` emits a control-plane-ready capability payload.
+- Use `--compact` for single-line JSON output.

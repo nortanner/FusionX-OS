@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Capability",
+  "type": "object",
+  "required": ["id", "class", "version", "health"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "class": {
+      "type": "string",
+      "enum": ["cpu", "gpu", "io", "memory", "network", "storage", "accelerator"]
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "string", "boolean"]
+      }
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "string", "boolean"]
+      }
+    },
+    "health": {
+      "type": "string",
+      "enum": ["ok", "degraded", "unavailable"]
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

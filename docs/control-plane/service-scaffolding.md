@@ -32,3 +32,8 @@ control-plane/
 ## M1 Deliverables
 - Service stubs with health checks and structured logging hooks.
 - Shared schema module for capability and environment types.
+
+## Shared Schemas (M1)
+- `control-plane/pkg/schema/health.schema.json`
+- `control-plane/pkg/schema/capability.schema.json`
+- `control-plane/pkg/schema/environment.schema.json`

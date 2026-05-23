@@ -12,3 +12,8 @@
 - Consumes platform data from kernel and device drivers.
 
 **Ownership boundary:** Hardware Integration Team
+
+## Apple Silicon Snapshot (M1)
+- Uses `sysctl` on macOS to populate CPU and memory capabilities.
+- Keys: `hw.ncpu`, `hw.machine`, `hw.model`, `hw.memsize`, `hw.pagesize`.
+- Non-macOS builds fall back to empty properties with degraded health.

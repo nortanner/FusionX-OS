@@ -23,6 +23,7 @@
 ### Capabilities
 - `GET /v1/capabilities`
 - `GET /v1/capabilities/{capabilityId}`
+- `POST /v1/capabilities/register` (capability registry ingestion)
 
 ### Environments
 - `POST /v1/environments`

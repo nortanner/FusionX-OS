@@ -20,6 +20,12 @@ Maintain a centralized catalog of hardware and platform capabilities for the sch
 - Query by class, label, or location.
 - Deprecate or remove stale capabilities.
 
+## Service Endpoints (M1)
+- `GET /health`
+- `GET /v1/capabilities`
+- `GET /v1/capabilities/{capabilityId}`
+- `POST /v1/capabilities/register`
+
 ## Transport Payload
 - Hardware HAL publishes `{ generated_at, capabilities }` payloads to the capability registry transport.
 - `generated_at` is reported as epoch seconds.

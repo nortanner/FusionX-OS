@@ -11,3 +11,6 @@
 - Supplies hardware contracts to `/kernel` and `/control-plane`
 
 **Ownership boundary:** Hardware Integration Team
+
+## Modules
+- `hal/`: Rust hardware abstraction layer and capability discovery scaffolding.

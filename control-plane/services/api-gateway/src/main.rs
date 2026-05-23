@@ -56,6 +56,7 @@ struct HealthPayload {
 
 #[derive(Serialize)]
 #[serde(rename_all = "snake_case")]
+#[allow(dead_code)]
 enum HealthStatus {
     Ok,
     Degraded,

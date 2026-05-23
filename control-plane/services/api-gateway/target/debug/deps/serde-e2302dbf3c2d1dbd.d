@@ -1,0 +1,14 @@
+/tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/deps/serde-e2302dbf3c2d1dbd.d: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/build/serde-be62b92d4562b0f4/out/private.rs
+
+/tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/deps/libserde-e2302dbf3c2d1dbd.rlib: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/build/serde-be62b92d4562b0f4/out/private.rs
+
+/tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/deps/libserde-e2302dbf3c2d1dbd.rmeta: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/build/serde-be62b92d4562b0f4/out/private.rs
+
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/build/serde-be62b92d4562b0f4/out/private.rs:
+
+# env-dep:OUT_DIR=/tmp/workspace/nortanner/FusionX-OS/control-plane/services/api-gateway/target/debug/build/serde-be62b92d4562b0f4/out

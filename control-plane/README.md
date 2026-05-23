@@ -12,3 +12,9 @@
 - Integrates hardware allocation signals from `/hardware`
 
 **Ownership boundary:** Control Plane Team
+
+## Docs
+- [MVP scope](../docs/control-plane/mvp-scope.md)
+- [API skeleton](../docs/control-plane/api.md)
+- [Service scaffolding](../docs/control-plane/service-scaffolding.md)
+- [Capability registry](../docs/control-plane/capability-registry.md)

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Environment",
+  "type": "object",
+  "required": ["id", "runtime", "state"],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "runtime": {
+      "type": "string",
+      "enum": ["native", "container", "vm"]
+    },
+    "state": {
+      "type": "string",
+      "enum": ["creating", "running", "stopped", "error", "degraded"]
+    },
+    "requestedResources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "string", "boolean"]
+      }
+    },
+    "assignedResources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "string", "boolean"]
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "runtimeId": {
+      "type": "string"
+    },
+    "statusMessage": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

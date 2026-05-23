@@ -17,3 +17,8 @@
 - Uses `sysctl` on macOS to populate CPU and memory capabilities.
 - Keys: `hw.ncpu`, `hw.machine`, `hw.model`, `hw.memsize`, `hw.pagesize`.
 - Non-macOS builds fall back to empty properties with degraded health.
+
+## GPU Discovery (M1)
+- Uses `system_profiler SPDisplaysDataType -json` on macOS.
+- Captures `_name`, `spdisplays_metal`, `spdisplays_vram_shared`, and IDs when present.
+- Adds labels: `integrated`, `apple-silicon`.

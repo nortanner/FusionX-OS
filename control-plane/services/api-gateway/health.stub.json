@@ -1,6 +1,11 @@
 {
+  "requestId": "req-1735689600000-0",
   "status": "ok",
-  "service": "api-gateway",
-  "version": "0.1.0",
-  "timestamp": "2026-01-01T00:00:00Z"
+  "data": {
+    "status": "ok",
+    "service": "api-gateway",
+    "version": "0.1.0",
+    "timestamp": "2026-01-01T00:00:00Z"
+  },
+  "error": null
 }

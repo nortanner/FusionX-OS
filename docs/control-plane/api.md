@@ -19,11 +19,13 @@
 ## Endpoint Skeleton
 ### Health
 - `GET /v1/health`
+  - Provided by the API gateway with `{ requestId, status, data, error }` envelope.
 
 ### Capabilities
 - `GET /v1/capabilities`
 - `GET /v1/capabilities/{capabilityId}`
 - `POST /v1/capabilities/register` (capability registry ingestion)
+  - API gateway proxies `GET` requests to the capability registry service.
 
 ### Environments
 - `POST /v1/environments`

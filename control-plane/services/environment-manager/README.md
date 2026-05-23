@@ -13,3 +13,10 @@
 - Invokes runtime adapters in `/containers` and `/virtualization`.
 
 **Ownership boundary:** Control Plane Team
+
+## Run (M1)
+- `cargo run` starts the service on `127.0.0.1:8082`.
+- Set `ENVIRONMENT_MANAGER_ADDR` to override the bind address.
+
+## API (M1)
+- `GET /health`

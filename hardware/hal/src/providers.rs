@@ -119,9 +119,9 @@ fn apple_silicon_gpu_capabilities() -> Vec<Capability> {
         gpu.labels
             .extend(vec!["integrated".to_string(), "apple-silicon".to_string()]);
 
-        insert_text_property(&mut gpu, "metal_support", entry.get("spdisplays_metal"));
-        insert_text_property(&mut gpu, "vram_shared", entry.get("spdisplays_vram_shared"));
-        insert_text_property(&mut gpu, "vram", entry.get("spdisplays_vram"));
+        insert_metal_properties(&mut gpu, entry.get("spdisplays_metal"));
+        insert_vram_shared_properties(&mut gpu, entry.get("spdisplays_vram_shared"));
+        insert_vram_properties(&mut gpu, entry.get("spdisplays_vram"));
         insert_text_property(&mut gpu, "device_id", entry.get("spdisplays_device-id"));
         insert_text_property(&mut gpu, "vendor_id", entry.get("spdisplays_vendor-id"));
         insert_text_property(&mut gpu, "revision_id", entry.get("spdisplays_revision-id"));
@@ -197,5 +197,208 @@ fn insert_text_property(target: &mut Capability, key: &str, value: Option<&Value
         target
             .properties
             .insert(key.to_string(), CapabilityValue::Number(number));
+    }
+}
+
+fn insert_metal_properties(target: &mut Capability, value: Option<&Value>) {
+    let Some(value) = value else {
+        return;
+    };
+    match value {
+        Value::Bool(value) => {
+            target
+                .properties
+                .insert("metal_support".to_string(), CapabilityValue::Bool(*value));
+        }
+        Value::Number(number) => {
+            if let Some(value) = number.as_f64() {
+                target.properties.insert(
+                    "metal_support".to_string(),
+                    CapabilityValue::Number(value),
+                );
+            }
+        }
+        Value::String(text) => {
+            let trimmed = text.trim();
+            if trimmed.is_empty() {
+                return;
+            }
+            if let Some(supported) = parse_metal_support(trimmed) {
+                target.properties.insert(
+                    "metal_support".to_string(),
+                    CapabilityValue::Bool(supported),
+                );
+                if let Some(feature_set) = parse_metal_feature_set(trimmed) {
+                    target.properties.insert(
+                        "metal_feature_set".to_string(),
+                        CapabilityValue::Text(feature_set),
+                    );
+                } else if trimmed.to_lowercase() != "supported" {
+                    target.properties.insert(
+                        "metal_support_detail".to_string(),
+                        CapabilityValue::Text(trimmed.to_string()),
+                    );
+                }
+            } else {
+                target.properties.insert(
+                    "metal_support_detail".to_string(),
+                    CapabilityValue::Text(trimmed.to_string()),
+                );
+            }
+        }
+        _ => {}
+    }
+}
+
+fn insert_vram_properties(target: &mut Capability, value: Option<&Value>) {
+    let Some(value) = value else {
+        return;
+    };
+    match value {
+        Value::Number(number) => {
+            if let Some(value) = number.as_f64() {
+                target
+                    .properties
+                    .insert("vram_bytes".to_string(), CapabilityValue::Number(value));
+            }
+        }
+        Value::String(text) => {
+            let trimmed = text.trim();
+            if trimmed.is_empty() {
+                return;
+            }
+            if let Some(bytes) = parse_memory_bytes(trimmed) {
+                target
+                    .properties
+                    .insert("vram_bytes".to_string(), CapabilityValue::Number(bytes));
+            } else {
+                target
+                    .properties
+                    .insert("vram".to_string(), CapabilityValue::Text(trimmed.to_string()));
+            }
+        }
+        _ => {}
+    }
+}
+
+fn insert_vram_shared_properties(target: &mut Capability, value: Option<&Value>) {
+    let Some(value) = value else {
+        return;
+    };
+    match value {
+        Value::Bool(value) => {
+            target
+                .properties
+                .insert("vram_shared".to_string(), CapabilityValue::Bool(*value));
+        }
+        Value::Number(number) => {
+            if let Some(value) = number.as_f64() {
+                target.properties.insert(
+                    "vram_shared_bytes".to_string(),
+                    CapabilityValue::Number(value),
+                );
+                target
+                    .properties
+                    .insert("vram_shared".to_string(), CapabilityValue::Bool(true));
+            }
+        }
+        Value::String(text) => {
+            let trimmed = text.trim();
+            if trimmed.is_empty() {
+                return;
+            }
+            if let Some(bytes) = parse_memory_bytes(trimmed) {
+                target.properties.insert(
+                    "vram_shared_bytes".to_string(),
+                    CapabilityValue::Number(bytes),
+                );
+                target
+                    .properties
+                    .insert("vram_shared".to_string(), CapabilityValue::Bool(true));
+            } else if let Some(shared) = parse_shared_flag(trimmed) {
+                target
+                    .properties
+                    .insert("vram_shared".to_string(), CapabilityValue::Bool(shared));
+            } else {
+                target.properties.insert(
+                    "vram_shared_detail".to_string(),
+                    CapabilityValue::Text(trimmed.to_string()),
+                );
+            }
+        }
+        _ => {}
+    }
+}
+
+fn parse_memory_bytes(text: &str) -> Option<f64> {
+    let mut number = String::new();
+    let mut unit = String::new();
+    for ch in text.chars() {
+        if ch.is_ascii_digit() || ch == '.' {
+            if unit.is_empty() {
+                number.push(ch);
+            }
+        } else if ch.is_ascii_alphabetic() {
+            if !number.is_empty() {
+                unit.push(ch);
+            }
+        } else if !number.is_empty() && !unit.is_empty() {
+            break;
+        }
+    }
+
+    if number.is_empty() {
+        return None;
+    }
+
+    let value = number.parse::<f64>().ok()?;
+    let multiplier = match unit.to_lowercase().as_str() {
+        "" | "b" | "byte" | "bytes" => 1.0,
+        "kb" | "kib" => 1024.0,
+        "mb" | "mib" => 1024.0 * 1024.0,
+        "gb" | "gib" => 1024.0 * 1024.0 * 1024.0,
+        "tb" | "tib" => 1024.0 * 1024.0 * 1024.0 * 1024.0,
+        _ => return None,
+    };
+
+    Some(value * multiplier)
+}
+
+fn parse_shared_flag(text: &str) -> Option<bool> {
+    let normalized = text.trim().to_lowercase();
+    if normalized.contains("shared") || normalized == "yes" || normalized == "true" {
+        Some(true)
+    } else if normalized.contains("dedicated")
+        || normalized.contains("not shared")
+        || normalized == "no"
+        || normalized == "false"
+    {
+        Some(false)
+    } else {
+        None
+    }
+}
+
+fn parse_metal_support(text: &str) -> Option<bool> {
+    let normalized = text.trim().to_lowercase();
+    if normalized.contains("not supported") || normalized.contains("unsupported") {
+        Some(false)
+    } else if normalized.contains("supported") {
+        Some(true)
+    } else {
+        None
+    }
+}
+
+fn parse_metal_feature_set(text: &str) -> Option<String> {
+    let normalized = text.to_lowercase();
+    let marker = "feature set";
+    let index = normalized.find(marker)?;
+    let start = index + marker.len();
+    let feature = text[start..].trim_start_matches(&[' ', ':', ',', '-'][..]);
+    if feature.is_empty() {
+        None
+    } else {
+        Some(feature.to_string())
     }
 }

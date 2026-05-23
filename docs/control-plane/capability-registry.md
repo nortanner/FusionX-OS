@@ -20,6 +20,13 @@ Maintain a centralized catalog of hardware and platform capabilities for the sch
 - Query by class, label, or location.
 - Deprecate or remove stale capabilities.
 
+## Transport Payload
+- Hardware HAL publishes `{ generated_at, capabilities }` payloads to the capability registry transport.
+- `generated_at` is reported as epoch seconds.
+- GPU properties normalize Metal/VRAM fields:
+  - `metal_support` (boolean), `metal_feature_set` (string), optional `metal_support_detail`.
+  - `vram_bytes` (number), `vram_shared` (boolean), optional `vram_shared_bytes` or `vram_shared_detail`.
+
 ## Sources of Truth
 - **Hardware abstraction** publishes baseline capability snapshots and health.
 - **Runtime adapters** publish runtime-specific features (hypervisor/container).
